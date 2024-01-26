@@ -4,7 +4,7 @@ import {AppDataSource} from "../data-source"
 import {DatabaseError} from "../Model/errors";
 import {IProductRepository} from "./product-repository-interface";
 
-export class ProductRepository {
+export class ProductRepository implements IProductRepository{
     private productRepository: Repository<Product>;
 
     constructor() {
