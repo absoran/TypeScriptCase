@@ -16,4 +16,16 @@ export class Product {
 
     @Column()
     stock_count !: number
+
+    @Column()
+    created_at !: Date
+
+    @Column()
+    updated_at !: Date
+
+    @Column()
+    deleted_at !: Date
+
+    @Column()
+    is_active !: boolean
 }
