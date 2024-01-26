@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import {CreateDateColumn, UpdateDateColumn, DeleteDateColumn} from "typeorm";
 
 @Entity()
 export class Product {
@@ -17,23 +18,16 @@ export class Product {
     @Column()
     stock_count !: number
 
-    @Column()
+    @CreateDateColumn()
     created_at ?: Date
 
-    @Column()
+    @UpdateDateColumn()
     updated_at ?: Date
 
-    @Column()
+    @DeleteDateColumn()
     deleted_at ?: Date
 
-    @Column()
+    @Column('boolean', {default: true})
     is_active ?: boolean
 
-    // constructor(userDto:any) {
-    //     this.id = userDto.id
-    //     this.name = userDto.name
-    //     this.description = userDto.description
-    //     this.price = userDto.price
-    //     this.stock_count = userDto.stock_count
-    // }
 }

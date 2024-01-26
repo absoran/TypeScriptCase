@@ -1,6 +1,6 @@
 import {Product} from '../Model/product';
-import {IProductRepository} from "../Repository/product-repository-interface";
 import {ProductRepository} from "../Repository/product-repository";
+import {CreateProductDTO, UpdateProductDTO} from "../Model/product-DTO";
 
 export class ProductService {
     private productRepository: ProductRepository;
@@ -9,7 +9,7 @@ export class ProductService {
         this.productRepository = productRepository;
     }
 
-    async createProduct(ProductData: Partial<Product>): Promise<Product> {
+    async createProduct(ProductData: CreateProductDTO): Promise<Product> {
         try {
             return await this.productRepository.createProduct(ProductData);
         } catch (error) {
@@ -25,7 +25,7 @@ export class ProductService {
         }
     }
 
-    async getAllEntities(): Promise<Product[] | null> {
+    async getAllProducts(): Promise<Product[] | null> {
         try {
             return await this.productRepository.getProducts();
         } catch (error) {
@@ -34,7 +34,7 @@ export class ProductService {
         }
     }
 
-    async updateProduct(id: number, updatedData: Partial<Product>): Promise<Product | null> {
+    async updateProduct(id: number, updatedData: UpdateProductDTO): Promise<Product | null> {
         try {
             return await this.productRepository.updateProduct(id, updatedData);
         } catch (error) {
