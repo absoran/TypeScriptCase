@@ -1,5 +1,10 @@
 # Project: TypeScriptAPI
-
+## Instructions 
+To start it install npm and run dev script;
+1.  Go to directory that project is going to be cloned.
+2. `git clone https://github.com/absoran/TypeScriptCase.git`
+3. `npm install`
+4. `npm run dev`
 
 <details>
     <summary>API call examples</summary>
