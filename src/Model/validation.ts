@@ -30,7 +30,7 @@ export const UpdateProductSchema: ObjectSchema<UpdateProductDTO> = Joi.object({
 });
 
 // ProductIdSchema is used by id validation in endpoint e.g: getProductById
-// id field is required and expected as string in endpoints that uses ProductIdSchema
+// id field is required and expected in endpoints that uses ProductIdSchema
 export const ProductIdSchema: ObjectSchema<Pick<ProductDTO, "id">> = Joi.object({
     params: {
         id: Joi.string().required()
@@ -54,8 +54,8 @@ export const UpdateProductVariantSchema: ObjectSchema<ProductVariantDTO> = Joi.o
     },
 });
 
-// ProductIdSchema is used by id validation in endpoint e.g: getProductById
-// id field is required and expected as string in endpoints that uses ProductIdSchema
+// ProductVariantIdSchema is used by id validation in endpoint e.g: getProductById
+// id field is required and expected in endpoints that uses ProductVariantIdSchema
 export const ProductVariantIdSchema: ObjectSchema<Pick<ProductVariant, "id">> = Joi.object({
     params: {
         id: Joi.string().required()

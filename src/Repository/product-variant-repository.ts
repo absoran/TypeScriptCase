@@ -1,10 +1,11 @@
-
 import {Repository} from "typeorm";
 import {ProductVariant} from "../Model/product-variant.ts";
 import {AppDataSource} from "../data-source.ts";
 import {DatabaseError} from "../Model/errors.ts";
 import {IProductVariantRepository} from "./product-variant-repo-interface.ts";
 
+// ProductVariantRepository handles database interactions with typeORM package
+// ProductVariantRepository errors wrapped and handled with DatabaseError model
 export class ProductVariantRepository implements IProductVariantRepository{
     private productVariantRepository: Repository<ProductVariant>
 

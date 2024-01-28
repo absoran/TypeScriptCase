@@ -2,14 +2,14 @@ import {Product} from '../Model/product';
 import {ProductRepository} from "../Repository/product-repository";
 import {CreateProductDTO, UpdateProductDTO} from "../Model/product-DTO";
 import {ProductVariantRepository} from "../Repository/product-variant-repository.ts";
-import {CreateProductVariantDTO, ProductVariantDTO, UpdateProductVariantDTO} from "../Model/product-variant-DTO.ts";
+import {CreateProductVariantDTO, UpdateProductVariantDTO} from "../Model/product-variant-DTO.ts";
 import {ProductVariant} from "../Model/product-variant.ts";
 
 // ProductService class takes repository as constructor parameter for dependency injection
 // ProductService errors wrapped and handled with error model
 export class ProductService {
     private productRepository: ProductRepository;
-    private productVariantRepository : ProductVariantRepository;
+    private productVariantRepository: ProductVariantRepository;
 
     constructor(productRepository: ProductRepository, productVariantRepository: ProductVariantRepository) {
         this.productRepository = productRepository;
@@ -38,6 +38,7 @@ export class ProductService {
 
             const variants = await this.productVariantRepository.getVariantsByProductId(id);
             if (variants != null) {
+                // ts ignored because null check is done
                 // @ts-ignore
                 product.variants = variants;
             }

@@ -5,24 +5,27 @@ import {
     Router,
 } from "express";
 
-import {ProductService} from "../Service/product-service";
-import {CreateProductDTO, UpdateProductDTO} from "../Model/product-DTO";
-import {validationMiddleware} from "../Middlewares/validation-middleware";
 import {
     CreateProductSchema,
     CreateProductVariantSchema,
-    ProductIdSchema, ProductVariantIdSchema,
-    UpdateProductSchema, UpdateProductVariantSchema
+    ProductIdSchema,
+    ProductVariantIdSchema,
+    UpdateProductSchema,
+    UpdateProductVariantSchema
 } from "../Model/validation";
+
+import {ProductService} from "../Service/product-service";
+import {CreateProductDTO, UpdateProductDTO} from "../Model/product-DTO";
+import {validationMiddleware} from "../Middlewares/validation-middleware";
 import {CreateProductVariantDTO, UpdateProductVariantDTO} from "../Model/product-variant-DTO.ts";
 
-export class ProductControllers{
+export class ProductControllers {
     readonly paths = "/products"
     readonly path = "/product"
     readonly router = Router();
     private productService: ProductService;
 
-    constructor(productService : ProductService) {
+    constructor(productService: ProductService) {
         this.productService = productService;
         this.initializeRoutes()
     }
@@ -120,7 +123,7 @@ export class ProductControllers{
 
         try {
             const dto = new CreateProductVariantDTO(request.body)
-            dto.product_id = parseInt(request.params["id"],10)
+            dto.product_id = parseInt(request.params["id"], 10)
             const variant = await this.productService.createProductVariant(dto);
 
             return response.status(200).json({
@@ -143,7 +146,7 @@ export class ProductControllers{
         try {
             const dto = new UpdateProductDTO(request.body)
 
-            const products = await this.productService.updateProduct(dto.id as number,dto);
+            const products = await this.productService.updateProduct(dto.id as number, dto);
 
             return response.status(200).json({
                 data: {
@@ -164,7 +167,7 @@ export class ProductControllers{
         try {
             const dto = new UpdateProductVariantDTO(request.body)
 
-            const variant = await this.productService.updateProductVariant(dto.id as number,dto);
+            const variant = await this.productService.updateProductVariant(dto.id as number, dto);
 
             return response.status(200).json({
                 data: {
@@ -185,7 +188,7 @@ export class ProductControllers{
 
         try {
 
-            const products = await this.productService.deleteProduct(parseInt(request.params["id"],10));
+            const products = await this.productService.deleteProduct(parseInt(request.params["id"], 10));
 
             return response.status(200).json({
                 data: {
@@ -205,7 +208,7 @@ export class ProductControllers{
 
         try {
 
-            const variant = await this.productService.deleteProductVariant(parseInt(request.params["id"],10));
+            const variant = await this.productService.deleteProductVariant(parseInt(request.params["id"], 10));
 
             return response.status(200).json({
                 data: {
@@ -226,7 +229,7 @@ export class ProductControllers{
 
         try {
 
-            const products = await this.productService.getProductById(parseInt(request.params["id"],10));
+            const products = await this.productService.getProductById(parseInt(request.params["id"], 10));
 
             return response.status(200).json({
                 data: {

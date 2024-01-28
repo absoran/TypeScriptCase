@@ -1,6 +1,6 @@
 import {ProductDTO} from "./product-DTO.ts";
 
-
+// ProductVariantDTO will be used as base DTO for other variant DTO's
 export interface ProductVariantDTO{
     id : number;
     product_id: number;
@@ -8,6 +8,7 @@ export interface ProductVariantDTO{
     description : string;
 }
 
+// CreateProductVariantDTO used in CreateProductVariant endpoint, user do not need access internal fields like created_at, updated_at etc
 export class CreateProductVariantDTO implements Omit<ProductVariantDTO, "id">{
     product_id : number;
     name : string;
@@ -19,6 +20,7 @@ export class CreateProductVariantDTO implements Omit<ProductVariantDTO, "id">{
     }
 }
 
+// UpdateProductVariantDTO used in UpdateProductVariant endpoint, user do not need access internal fields like created_at, updated_at etc
 export class UpdateProductVariantDTO implements Partial<ProductVariantDTO>{
     id : number | undefined;
     name : string | undefined;
