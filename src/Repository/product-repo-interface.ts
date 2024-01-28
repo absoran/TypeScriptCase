@@ -1,5 +1,6 @@
 import {Product} from "../Model/product";
 
+// IProductRepository interface will be implemented in repository layer
 export interface IProductRepository {
     createProduct(productData: Partial<Product>): Promise<Product>
     getProductById(id: number): Promise<Product | null>
