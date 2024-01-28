@@ -2,13 +2,15 @@ import { Repository } from 'typeorm';
 import {Product} from "../Model/product";
 import {AppDataSource} from "../data-source"
 import {DatabaseError} from "../Model/errors";
-import {IProductRepository} from "./product-repository-interface";
+import {IProductRepository} from "./product-repo-interface.ts";
 
+// ProductRepository handles database interactions with typeORM package
+// ProductRepository errors wrapped and handled with DatabaseError model
 export class ProductRepository implements IProductRepository{
     private productRepository: Repository<Product>;
 
     constructor() {
-        this.productRepository = AppDataSource.getRepository(Product)
+        this.productRepository = AppDataSource.getRepository(Product);
     }
 
     async createProduct(productData: Partial<Product>): Promise<Product> {
