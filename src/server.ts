@@ -5,8 +5,6 @@ import {AppDataSource} from "./data-source";
 import dotenv from "dotenv";
 import express from "express";
 import morgan from "morgan";
-import swaggerUi from "swagger-ui-express";
-import swaggerOutput from "./swagger_output.json";
 
 dotenv.config();
 interface Controller {
