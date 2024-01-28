@@ -1,13 +1,16 @@
 import {Product} from "./product";
 
+// ProductDTO will be used as base DTO for other DTO's
 export interface ProductDTO{
     id : number;
     name : string;
     description : string;
     price : number;
     stock_count : number;
+    //variants: any;
 }
 
+// UpdateProductDTO used in UpdateProduct endpoint, user do not need access internal fields like created_at, updated_at etc
 export class UpdateProductDTO implements Partial<ProductDTO>{
     id : number | undefined;
     name : string | undefined;
@@ -25,6 +28,7 @@ export class UpdateProductDTO implements Partial<ProductDTO>{
     }
 }
 
+// CreateProductDTO used in CreateProduct endpoint, user do not need access internal fields like created_at, updated_at etc
 export class CreateProductDTO implements Omit<ProductDTO, "id">{
     name : string;
     price : number;
@@ -37,4 +41,3 @@ export class CreateProductDTO implements Omit<ProductDTO, "id">{
         this.description = description;
     }
 }
-

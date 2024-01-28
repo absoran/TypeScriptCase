@@ -1,3 +1,5 @@
+
+// Common HTTP errors with status codes to be used in various responses.
 export const HttpStatusCode = {
     OK: 200,
     CREATED: 201,

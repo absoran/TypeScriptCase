@@ -7,6 +7,8 @@ export interface ValidationResponse {
     validationErrors?: ValidationErrorItem[];
 }
 
+// validationMiddleware, takes schema that we defined validations and handles validation. If the request is not valid-
+// response status set as 422 and response will be returned without going service layer.
 export const validationMiddleware =
     (schema: Schema, validationOptions: Joi.ValidationOptions = {}) =>
         async (req: Request, response: Response, next: NextFunction) => {

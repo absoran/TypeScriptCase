@@ -8,7 +8,13 @@ import {
 import {ProductService} from "../Service/product-service";
 import {CreateProductDTO, UpdateProductDTO} from "../Model/product-DTO";
 import {validationMiddleware} from "../Middlewares/validation-middleware";
-import {CreateProductSchema, ProductIdSchema, UpdateProductSchema} from "../Model/validation";
+import {
+    CreateProductSchema,
+    CreateProductVariantSchema,
+    ProductIdSchema, ProductVariantIdSchema,
+    UpdateProductSchema, UpdateProductVariantSchema
+} from "../Model/validation";
+import {CreateProductVariantDTO, UpdateProductVariantDTO} from "../Model/product-variant-DTO.ts";
 
 export class ProductControllers{
     readonly paths = "/products"
@@ -21,6 +27,7 @@ export class ProductControllers{
         this.initializeRoutes()
     }
 
+    // Route definitions
     public initializeRoutes() {
 
         this.router.get(
@@ -37,18 +44,34 @@ export class ProductControllers{
             validationMiddleware(CreateProductSchema),
             this.CreateProduct
         );
+        this.router.post(
+            `${this.path}/:id/variant`,
+            validationMiddleware(CreateProductVariantSchema),
+            this.CreateVariant
+        );
         this.router.put(
             `${this.path}`,
             validationMiddleware(UpdateProductSchema),
             this.UpdateProduct
+        );
+        this.router.put(
+            `${this.path}/variant`,
+            validationMiddleware(UpdateProductVariantSchema),
+            this.UpdateVariant
         );
         this.router.delete(
             `${this.path}/:id`,
             validationMiddleware(ProductIdSchema),
             this.DeleteProduct
         );
+        this.router.delete(
+            `${this.path}/variant/:id`,
+            validationMiddleware(ProductVariantIdSchema),
+            this.DeleteVariant
+        );
     }
 
+    // getProducts handler with error handling.
     private GetProducts = async (
         request: Request,
         response: Response,
@@ -89,6 +112,28 @@ export class ProductControllers{
         }
     };
 
+    private CreateVariant = async (
+        request: Request,
+        response: Response,
+        next: NextFunction
+    ) => {
+
+        try {
+            const dto = new CreateProductVariantDTO(request.body)
+            dto.product_id = parseInt(request.params["id"],10)
+            const variant = await this.productService.createProductVariant(dto);
+
+            return response.status(200).json({
+                data: {
+                    variant
+                }
+            });
+        } catch (err) {
+            next(err);
+        }
+    };
+
+    // updateProduct handler with error handling.
     private UpdateProduct = async (
         request: Request,
         response: Response,
@@ -110,6 +155,28 @@ export class ProductControllers{
         }
     };
 
+    private UpdateVariant = async (
+        request: Request,
+        response: Response,
+        next: NextFunction
+    ) => {
+
+        try {
+            const dto = new UpdateProductVariantDTO(request.body)
+
+            const variant = await this.productService.updateProductVariant(dto.id as number,dto);
+
+            return response.status(200).json({
+                data: {
+                    variant
+                }
+            });
+        } catch (err) {
+            next(err);
+        }
+    };
+
+    // deleteProduct handler with error handling.
     private DeleteProduct = async (
         request: Request,
         response: Response,
@@ -130,6 +197,27 @@ export class ProductControllers{
         }
     };
 
+    private DeleteVariant = async (
+        request: Request,
+        response: Response,
+        next: NextFunction
+    ) => {
+
+        try {
+
+            const variant = await this.productService.deleteProductVariant(parseInt(request.params["id"],10));
+
+            return response.status(200).json({
+                data: {
+                    variant
+                }
+            });
+        } catch (err) {
+            next(err);
+        }
+    };
+
+    // getProductById handler with error handling.
     private GetProductByID = async (
         request: Request,
         response: Response,
